@@ -114,3 +114,70 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+//Grabbing the parent element for the article div
+const articles  = document.querySelector('.articles')
+
+function articleMaker({title, date, firstParagraph, secondParagraph, thirdParagraph}) {
+  //create all elements needed for an article
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const artP1 = document.createElement('p');
+  const artP2 = document.createElement('p');
+  const artP3 = document.createElement('p');
+  const expandButton = document.createElement('div');
+  const closeButton = document.createElement('button');
+
+  //Element structure set up and appending
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(closeButton);
+  article.appendChild(artP1);
+  article.appendChild(artP2);
+  article.appendChild(artP3);
+  article.appendChild(expandButton);
+
+  //adding element class names
+  article.classList.add('article');
+  articleTitle.classList.add('title');
+  articleDate.classList.add('date');
+  artP1.classList.add('articleP1');
+  artP2.classList.add('articleP2');
+  artP3.classList.add('articleP3');
+  expandButton.classList.add('eBtn');
+  closeButton.classList.add('cBtn');
+
+  //setting Text Content
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  artP1.textContent = Firstparagraph;
+  artP2.textContent = SecondParagraph;
+  artP3.textContent = ThirdParagraph;
+  expandButton.textContent = '+';
+  closeButton.textContent = 'Close';
+
+  //STEP 2
+  expandButton.addEventListener('click', (event) => {
+    article.classList.toggle('article-open');
+    //toggle class 'article-open' on div.article
+  })
+
+    closeButton.addEventListener('click', (event) => {
+      article.classList.add('hidden');
+    })
+
+  //Step 3
+  return article;
+}
+
+//Step 4
+//Test Function
+const test = articleMaker({title: 'foo', date: '8', Firstparagraph: 'Hi', SecondParagraph: 'my', ThirdParagraph: 'friend'});
+
+console.log(test);
+
+data.forEach(articleObj => {
+  const artElement = articleMaker(articleObj);
+  articles.appendChild(artElement)
+})
